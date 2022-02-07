@@ -1,0 +1,30 @@
+.films {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.films-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  max-width: 1024px;
+}
+.card {
+  margin: 3px;
+  overflow: hidden;
+  width: 150px;
+}
+
+.card img {
+  display: block;
+  max-width: 100%;
+}
+
+.paginations {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  width:80%;
+}
