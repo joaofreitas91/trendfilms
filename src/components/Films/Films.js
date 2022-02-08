@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getDataBackend } from '../services/API';
-import { FormatDate } from '../services/Format';
+import { useNavigate } from 'react-router-dom';
+import { getDataBackend } from '../../hooks/API';
+import { FormatDate } from '../../hooks/Format';
 import './Films.css';
 
 const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [films, setFilms] = useState([]);
+  const navigate = useNavigate();
 
   const handleURL = (page) => {
     console.log('handleURL', currentPage);
@@ -25,8 +27,6 @@ const Cards = () => {
   const changePage = async (event) => {
     const buttonValue = event.target.value;
 
-    debugger;
-
     console.log(buttonValue);
     let page = currentPage;
     console.log(page);
@@ -42,11 +42,16 @@ const Cards = () => {
     setFilms(data.results);
   };
 
+  function handleClick(event) {
+    const idFilm = event.currentTarget.getAttribute('data-id');
+    navigate(`/film/${idFilm}`);
+  }
+
   return (
     <section className="films">
       <div className="films-content">
         {films.map(({ id, poster_path, title, release_date }) => (
-          <div key={id} className="card">
+          <div data-id={id} key={id} className="card" onClick={handleClick}>
             <img
               src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
               alt={title}
