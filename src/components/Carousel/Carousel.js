@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDataBackend } from '../../hooks/API';
+import { getDataBackend } from '../../utils/API';
 
 const Carousel = (oItems) => {
   return (

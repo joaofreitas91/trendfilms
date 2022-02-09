@@ -2,7 +2,6 @@ import React from 'react';
 import './MiniCard.css';
 
 const MiniCards = ({ oItems }) => {
-  console.log('miranha', oItems[0]);
   return (
     <div className="mini-cards">
       {oItems.map(({ department, name }, index) => (

@@ -1,12 +1,17 @@
+import React, { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 import './Button.css';
 
-const Button = (props) => {
-  function chamar(event) {
-    console.log(event.target.innerText);
+const Button = ({ name, id }) => {
+  const global = useContext(GlobalContext);
+
+  function chamar() {
+    global.setFilter(id);
   }
+
   return (
     <button className="button" onClick={chamar}>
-      {props.name}
+      {name} {id}
     </button>
   );
 };

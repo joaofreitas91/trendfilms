@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './DetailFilm.css';
 import { useParams } from 'react-router-dom';
-import { getDataBackend } from '../../hooks/API';
+import { getDataBackend } from '../../utils/API';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { FormatDate } from '../../hooks/Format';
+import { FormatDate } from '../../utils/Format';
 import Carousel from '../../components/Carousel/Carousel';
 import MiniCards from '../../components/MiniCards/MiniCards';
 
@@ -42,7 +42,7 @@ const DetailFilm = () => {
           <div className="poster">
             <img
               src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${detail.poster_path}`}
-              alt="Miranha"
+              alt=""
             />
           </div>
           <div className="details">

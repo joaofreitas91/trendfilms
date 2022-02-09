@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
-import { getDataBackend } from '../../hooks/API';
-import { FormatDate } from '../../hooks/Format';
+import { getDataBackend } from '../../utils/API';
+import { FormatDate } from '../../utils/Format';
+
 import './Films.css';
 
 const Cards = () => {
@@ -9,8 +11,9 @@ const Cards = () => {
   const [films, setFilms] = useState([]);
   const navigate = useNavigate();
 
+  const global = useContext(GlobalContext);
+
   const handleURL = (page) => {
-    console.log('handleURL', currentPage);
     const url = `http://api.themoviedb.org/3/movie/popular?page=${page}&language=pt-BR&api_key=d31881d7732eb0ca7f5bfe7017713b39`;
 
     return url;
@@ -42,6 +45,18 @@ const Cards = () => {
     setFilms(data.results);
   };
 
+  async function filterFilms() {
+    const url = handleURL(currentPage);
+    const data = await getDataBackend(url, 'FilterFilms');
+    const results = data.results;
+    const filtro = global.filter;
+    const filterFilms = results.filter((film) => {
+      return film.genre_ids.toString().includes(filtro);
+    });
+
+    setFilms(filterFilms.length > 0 ? filterFilms : results);
+  }
+
   function handleClick(event) {
     const idFilm = event.currentTarget.getAttribute('data-id');
     navigate(`/film/${idFilm}`);
@@ -49,6 +64,7 @@ const Cards = () => {
 
   return (
     <section className="films">
+      <button onClick={filterFilms}> Teste de Filtro </button>
       <div className="films-content">
         {films.map(({ id, poster_path, title, release_date }) => (
           <div data-id={id} key={id} className="card" onClick={handleClick}>

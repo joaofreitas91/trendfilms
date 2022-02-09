@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDataBackend } from '../../hooks/API';
+import { getDataBackend } from '../../utils/API';
 import Button from '../Button/Button';
 import './SubHeader.css';
 
@@ -25,7 +25,7 @@ const SubHeader = () => {
         <p>Filtre por:</p>
         <div className="buttons">
           {categories.map(({ id, name }) => (
-            <Button key={id} name={name} />
+            <Button key={id} name={name} id={id} />
           ))}
         </div>
       </div>
