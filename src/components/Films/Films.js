@@ -17,7 +17,7 @@ const Cards = () => {
   };
   useEffect(() => {
     async function loadFilms() {
-      const url = handleURL();
+      const url = handleURL(1);
       const data = await getDataBackend(url, 'Films');
       setFilms(data.results);
     }

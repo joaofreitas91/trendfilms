@@ -1,0 +1,92 @@
+.detailFilm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  background-color: #2D0C5E;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.detailFilm h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.detailFilm h1 {
+  margin-bottom: 1rem;
+}
+
+.detailFilmContent {
+  display: flex;
+  width: 100%;
+  max-width: 1024px;
+  transform: translatey(60px);
+}
+
+.poster {
+  margin: 0 2rem;
+}
+
+.poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.details {
+  width: 50%;
+}
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.detailFilm span {
+  display: block;
+  margin-left: 1rem;
+}
+
+ .CircularProgressbar {
+  width: 15%;
+  vertical-align: middle;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: #14FF00;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+  stroke: #42246D;
+  stroke-linecap: round;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+  fill: #14FF00;
+  font-size: 2rem;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.CircularProgressbar .CircularProgressbar-background {
+  fill: #42246D;
+}
+
+.production {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+}
+.production div {
+  width: 33%;
+  margin-top: 2rem;
+}
