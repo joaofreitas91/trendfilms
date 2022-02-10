@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/trendfilms/static/css/main.0ffe0fe6.css",
+    "main.js": "/trendfilms/static/js/main.e91c8015.js",
+    "index.html": "/trendfilms/index.html",
+    "main.0ffe0fe6.css.map": "/trendfilms/static/css/main.0ffe0fe6.css.map",
+    "main.e91c8015.js.map": "/trendfilms/static/js/main.e91c8015.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ffe0fe6.css",
+    "static/js/main.e91c8015.js"
+  ]
+}
