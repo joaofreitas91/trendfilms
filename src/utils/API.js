@@ -5,6 +5,7 @@ export async function getDataBackend(url) {
     return dados;
   } else {
     const error = await response.text();
+
     return error;
   }
 }
