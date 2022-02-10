@@ -10,6 +10,7 @@ import MiniCards from '../../components/MiniCards/MiniCards';
 const DetailFilm = () => {
   const [detail, setDetail] = useState(null);
   const [credits, setCredits] = useState(null);
+  const [trailer, setTrailer] = useState(null);
   const params = useParams();
   const idFilm = params.id;
 
@@ -17,7 +18,6 @@ const DetailFilm = () => {
     async function loadDetailFilm() {
       const url = `https://api.themoviedb.org/3/movie/${idFilm}?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
       const data = await getDataBackend(url);
-      console.log('Detalhisticos', data);
       setDetail(data);
     }
     loadDetailFilm();
@@ -27,16 +27,25 @@ const DetailFilm = () => {
     async function loadCredits() {
       const url = `https://api.themoviedb.org/3/movie/${idFilm}/credits?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
       const data = await getDataBackend(url);
-      console.log('Miranha', data);
       setCredits(data);
     }
     loadCredits();
   }, []);
 
+  useEffect(() => {
+    async function loadTrailer() {
+      const url = `https://api.themoviedb.org/3/movie/${idFilm}/videos?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
+      const data = await getDataBackend(url);
+      setTrailer(data.results[0].key);
+    }
+    loadTrailer();
+  }, []);
+
   if (detail === null) return null;
   if (credits === null) return null;
+  // if (trailer === null) return null;
   return (
-    <>
+    <div className="detailPage">
       <section className="detailFilm">
         <div className="detailFilmContent">
           <div className="poster">
@@ -77,15 +86,28 @@ const DetailFilm = () => {
         </div>
       </section>
       {/* Elenco */}
-      <Carousel oItems={credits.cast} />
-      <iframe
-        width="300"
-        height="150"
-        src="https://www.youtube.com/embed/E17_oo0QtWw"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      ></iframe>
-    </>
+      <div className="carousel-container">
+        <div className="carousel-title">
+          <h2>Elenco Principal</h2>
+        </div>
+        <Carousel oItems={credits.cast} />
+      </div>
+
+      <div className="trailer-container">
+        <div className="trailer-title">
+          <h2>Trailer</h2>
+        </div>
+        <div className="trailer-video">
+          <iframe
+            width="85%"
+            height="545"
+            src={`https://www.youtube.com/embed/${trailer}`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        </div>
+      </div>
+    </div>
   );
 };
 

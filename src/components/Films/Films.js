@@ -51,7 +51,9 @@ const Films = () => {
     if (buttonValue === 'next') {
       ++page;
     } else {
-      --page;
+      if (currentPage > 1) {
+        --page;
+      }
     }
     setCurrentPage(page);
     const url = handleURL(page);

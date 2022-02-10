@@ -8,3 +8,9 @@ export async function getDataBackend(url) {
     return error;
   }
 }
+
+export function getImage(path) {
+  const fullPath = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${path}`;
+
+  return fullPath;
+}

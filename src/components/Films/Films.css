@@ -1,7 +1,6 @@
 .films {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
@@ -26,5 +25,5 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 1rem;
-  width:80%;
+  width:1024px;
 }

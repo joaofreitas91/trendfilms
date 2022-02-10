@@ -36,7 +36,6 @@ textarea {
   border: 1px solid #ccc;
   width: 100%;
   padding: 0.8rem;
-  border-radius: var(--radius);
   background: #eee;
   transition: 0.2s;
 }
@@ -44,28 +43,14 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--color);
   background: white;
-  box-shadow: 0 0 0 3px var(--color-light);
 }
 
 button {
   cursor: pointer;
   border: none;
-  border-radius: var(--radius);
   transition: 0.1s;
   padding: 0.8rem 1.6rem;
-}
-
-button:hover,
-button:focus {
-  background: var(--color);
-  box-shadow: 0 0 0 3px var(--color-light), 0 0 0 4px var(--color);
-  outline: none;
-}
-
-button:active {
-  box-shadow: 0 0 0 3px var(--color), 0 0 0 4px var(--color);
 }
 
 button:disabled {

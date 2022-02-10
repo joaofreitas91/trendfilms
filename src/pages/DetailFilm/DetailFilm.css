@@ -1,3 +1,7 @@
+.detailPage {
+  background-color: #f3f3f3;
+}
+
 .detailFilm {
   display: flex;
   justify-content: center;
@@ -8,6 +12,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: 400;
+  margin-bottom: 100px;
 }
 
 .detailFilm h1 {
@@ -89,4 +94,30 @@
 .production div {
   width: 33%;
   margin-top: 2rem;
+}
+
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-title {
+  width: 1024px;
+  margin: 20px 0;
+}
+
+.trailer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 200px;
+  width: 100%;
+}
+.trailer-video {
+  width: 1024px;
+}
+.trailer-title {
+  width: 1024px;
+  margin: 20px 0;
 }

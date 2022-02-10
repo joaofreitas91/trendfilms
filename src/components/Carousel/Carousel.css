@@ -1,17 +1,19 @@
 .carousel {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  overflow: hidden;
   overflow-x: scroll;
-  width: 100%;
-  height: 200px;
-  color: #fff;
-  margin-top: 30px;
+  max-width: 1024px;  
 }
 
-.carousel h3{
-  font-size: 16px;
+.carousel h3 {
+  display:block;
+}
+
+.carousel .card-cast {
+  background-color: #fff;
+  padding: 0.5rem; 
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .carousel::-webkit-scrollbar {
@@ -21,24 +23,24 @@
 }
 
 .carousel::-webkit-scrollbar-thumb {
-  background-color: #2D0C5E;
+  background-color: #ADADAD;
   border-radius: 20px;
-  border-left: 2px solid #2D0C5E;
-  border-right: 2px solid #2D0C5E;
+  border-left: 2px solid #ADADAD;
+  border-right: 2px solid #ADADAD;
 }
  
 .carousel::-webkit-scrollbar-track {
   border-radius: 20px;
-  background-color: #5A6C97;
+  background-color: #DDDDDD;
+}
+card-cast-img {
+  min-width: 175px;
+  min-height: 320px;
 }
 
-.carousel span {
-  font-size: 1rem;
-  margin: 5px ; 
-}
+.carousel .card-cast img {
+  width: 175px;
+  display: block;
+} 
 
-.cards {
-  margin: 5px;
-  padding: 10px;
 
-}

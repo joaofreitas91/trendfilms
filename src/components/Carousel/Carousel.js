@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { getImage } from '../../utils/API';
+import './Carousel.css';
 
 const Carousel = ({ oItems }) => {
-  console.log(oItems);
   return (
     <div className="carousel">
-      {oItems.map(({ department, name }, index) => (
-        <div className="cards" key={index}>
+      {oItems.map(({ profile_path, character, name }, index) => (
+        <div className="card-cast" key={index}>
+          <div className="card-cast-img">
+            <img src={getImage(profile_path)} alt={name} />
+          </div>
           <h3>{name}</h3>
-          <p>{department}</p>
+          <p>{character}</p>
         </div>
       ))}
     </div>
