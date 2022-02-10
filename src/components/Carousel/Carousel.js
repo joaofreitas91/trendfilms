@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { getDataBackend } from '../../utils/API';
 
-const Carousel = (oItems) => {
+const Carousel = ({ oItems }) => {
+  console.log(oItems);
   return (
-    <section className="carousel">
-      <div> oi </div>
-      <div> oi</div>
-      <div> oi</div>
-    </section>
+    <div className="carousel">
+      {oItems.map(({ department, name }, index) => (
+        <div className="cards" key={index}>
+          <h3>{name}</h3>
+          <p>{department}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 

@@ -5,7 +5,6 @@ import Films from '../../components/Films/Films';
 const HomePage = () => {
   return (
     <>
-      <SubHeader />
       <Films />
     </>
   );

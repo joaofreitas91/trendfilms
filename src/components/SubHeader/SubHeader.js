@@ -5,6 +5,8 @@ import './SubHeader.css';
 
 const SubHeader = () => {
   const [categories, setCategories] = useState([]);
+  const [contador, setContador] = useState(1);
+  const [filter, setFilter] = useState([]);
 
   useEffect(() => {
     async function loadCategories() {
@@ -16,16 +18,30 @@ const SubHeader = () => {
     loadCategories();
   }, []);
 
+  function callback({ target }) {
+    const id = target.getAttribute('id');
+    const hasID = filter.includes(id);
+
+    if (hasID) {
+      filter.splice(filter.indexOf(id), 1);
+    } else {
+      setFilter([...filter, id]);
+    }
+
+    console.log(filter);
+  }
+
   return (
     <section className="subHeader">
       <div className="subHeaderContent">
         <span>
-          Milhões de filmes, séries e pessoas para descobrir. Explore já.
+          Milhões de filmes, séries e pessoas para descobrir. Explore já{' '}
+          {contador}.
         </span>
         <p>Filtre por:</p>
         <div className="buttons">
           {categories.map(({ id, name }) => (
-            <Button key={id} name={name} id={id} />
+            <Button key={id} name={name} id={id} funcao={callback} />
           ))}
         </div>
       </div>

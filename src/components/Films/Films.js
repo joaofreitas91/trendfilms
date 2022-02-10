@@ -3,10 +3,24 @@ import { GlobalContext } from '../../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { getDataBackend } from '../../utils/API';
 import { FormatDate } from '../../utils/Format';
+import Button from '../Button/Button';
 
 import './Films.css';
 
-const Cards = () => {
+const Films = () => {
+  const [categories, setCategories] = useState([]);
+  const [contador, setContador] = useState(1);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const url =
+        'https://api.themoviedb.org/3/genre/movie/list?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR';
+      const data = await getDataBackend(url);
+      setCategories(data.genres);
+    }
+    loadCategories();
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [films, setFilms] = useState([]);
   const navigate = useNavigate();
@@ -45,16 +59,29 @@ const Cards = () => {
     setFilms(data.results);
   };
 
-  async function filterFilms() {
+  const [filter, setFilter] = useState([]);
+
+  async function filterFilms({ target }) {
+    const id = Number(target.getAttribute('id'));
     const url = handleURL(currentPage);
     const data = await getDataBackend(url, 'FilterFilms');
     const results = data.results;
-    const filtro = global.filter;
-    const filterFilms = results.filter((film) => {
-      return film.genre_ids.toString().includes(filtro);
+    const hasID = filter.includes(id);
+    let filterLocal = [...filter];
+
+    if (hasID) {
+      filterLocal.splice(filterLocal.indexOf(id), 1);
+    } else {
+      filterLocal = [...filter, id];
+    }
+
+    setFilter(filterLocal);
+
+    const filmsFiltered = results.filter((film) => {
+      return film.genre_ids.some((id) => filterLocal.includes(id));
     });
 
-    setFilms(filterFilms.length > 0 ? filterFilms : results);
+    setFilms(filmsFiltered.length === 0 ? results : filmsFiltered);
   }
 
   function handleClick(event) {
@@ -63,30 +90,45 @@ const Cards = () => {
   }
 
   return (
-    <section className="films">
-      <button onClick={filterFilms}> Teste de Filtro </button>
-      <div className="films-content">
-        {films.map(({ id, poster_path, title, release_date }) => (
-          <div data-id={id} key={id} className="card" onClick={handleClick}>
-            <img
-              src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
-              alt={title}
-            />
-            <p>{title}</p>
-            <p>{FormatDate(release_date)}</p>
+    <>
+      <section className="subHeader">
+        <div className="subHeaderContent">
+          <span>
+            Milhões de filmes, séries e pessoas para descobrir. Explore já.
+          </span>
+          <p>Filtre por:</p>
+          <div className="buttons">
+            {categories.map(({ id, name }) => (
+              <Button key={id} name={name} id={id} funcao={filterFilms} />
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="paginations">
-        <button onClick={changePage} value="back">
-          Página Anterior
-        </button>
-        <button onClick={changePage} value="next">
-          Próxima Pagina
-        </button>
-      </div>
-    </section>
+        </div>
+      </section>
+      <section className="films">
+        <div className="films-content">
+          {films.map(({ id, poster_path, title, release_date }) => (
+            <div data-id={id} key={id} className="card" onClick={handleClick}>
+              <img
+                src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
+                alt={title}
+              />
+              <p>{title}</p>
+              <p>{FormatDate(release_date)}</p>
+            </div>
+          ))}
+        </div>
+        <div className="paginations">
+          <button onClick={changePage} value="back">
+            Página Anterior
+          </button>
+          <span>{currentPage}</span>
+          <button onClick={changePage} value="next">
+            Próxima Pagina
+          </button>
+        </div>
+      </section>
+    </>
   );
 };
 
-export default Cards;
+export default Films;

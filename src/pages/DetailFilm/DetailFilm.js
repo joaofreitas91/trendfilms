@@ -17,7 +17,7 @@ const DetailFilm = () => {
     async function loadDetailFilm() {
       const url = `https://api.themoviedb.org/3/movie/${idFilm}?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
       const data = await getDataBackend(url);
-      console.log(data);
+      console.log('Detalhisticos', data);
       setDetail(data);
     }
     loadDetailFilm();
@@ -27,7 +27,7 @@ const DetailFilm = () => {
     async function loadCredits() {
       const url = `https://api.themoviedb.org/3/movie/${idFilm}/credits?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
       const data = await getDataBackend(url);
-      console.log(data);
+      console.log('Miranha', data);
       setCredits(data);
     }
     loadCredits();
@@ -78,6 +78,13 @@ const DetailFilm = () => {
       </section>
       {/* Elenco */}
       <Carousel oItems={credits.cast} />
+      <iframe
+        width="300"
+        height="150"
+        src="https://www.youtube.com/embed/E17_oo0QtWw"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      ></iframe>
     </>
   );
 };
