@@ -1,41 +1,32 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { getDataBackend } from '../../utils/API';
 import { FormatDate } from '../../utils/Format';
-import Button from '../Button/Button';
+import Button from '../../components/Button/Button';
 
 import './Films.css';
 
 const Films = () => {
   const [categories, setCategories] = useState([]);
-  const [contador, setContador] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [films, setFilms] = useState([]);
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState([]);
 
   useEffect(() => {
     async function loadCategories() {
-      const url =
-        'https://api.themoviedb.org/3/genre/movie/list?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR';
-      const data = await getDataBackend(url);
+      const path = 'genre/movie/list';
+      const data = await getDataBackend(path);
       setCategories(data.genres);
     }
     loadCategories();
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [films, setFilms] = useState([]);
-  const navigate = useNavigate();
-
-  const global = useContext(GlobalContext);
-
-  const handleURL = (page) => {
-    const url = `http://api.themoviedb.org/3/movie/popular?page=${page}&language=pt-BR&api_key=d31881d7732eb0ca7f5bfe7017713b39`;
-
-    return url;
-  };
   useEffect(() => {
     async function loadFilms() {
-      const url = handleURL(1);
-      const data = await getDataBackend(url, 'Films');
+      const path = `movie/popular`;
+      const page = 1;
+      const data = await getDataBackend(path, page);
       setFilms(data.results);
     }
     loadFilms();
@@ -43,10 +34,7 @@ const Films = () => {
 
   const changePage = async (event) => {
     const buttonValue = event.target.value;
-
-    console.log(buttonValue);
     let page = currentPage;
-    console.log(page);
 
     if (buttonValue === 'next') {
       ++page;
@@ -56,17 +44,15 @@ const Films = () => {
       }
     }
     setCurrentPage(page);
-    const url = handleURL(page);
-    const data = await getDataBackend(url, 'Films');
+    const path = `movie/popular`;
+    const data = await getDataBackend(path, page);
     setFilms(data.results);
   };
 
-  const [filter, setFilter] = useState([]);
-
   async function filterFilms({ target }) {
     const id = Number(target.getAttribute('id'));
-    const url = handleURL(currentPage);
-    const data = await getDataBackend(url, 'FilterFilms');
+    const path = `movie/popular`;
+    const data = await getDataBackend(path, currentPage);
     const results = data.results;
     const hasID = filter.includes(id);
     let filterLocal = [...filter];
@@ -88,7 +74,7 @@ const Films = () => {
 
   function handleClick(event) {
     const idFilm = event.currentTarget.getAttribute('data-id');
-    navigate(`/film/${idFilm}`);
+    navigate(`/trendfilms/film/${idFilm}`);
   }
 
   return (
@@ -114,7 +100,7 @@ const Films = () => {
                 src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
                 alt={title}
               />
-              <p>{title}</p>
+              <h3>{title}</h3>
               <p>{FormatDate(release_date)}</p>
             </div>
           ))}

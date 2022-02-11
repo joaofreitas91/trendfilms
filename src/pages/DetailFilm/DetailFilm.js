@@ -16,8 +16,8 @@ const DetailFilm = () => {
 
   useEffect(() => {
     async function loadDetailFilm() {
-      const url = `https://api.themoviedb.org/3/movie/${idFilm}?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
-      const data = await getDataBackend(url);
+      const path = `movie/${idFilm}`;
+      const data = await getDataBackend(path, null, true);
       setDetail(data);
     }
     loadDetailFilm();
@@ -25,8 +25,8 @@ const DetailFilm = () => {
 
   useEffect(() => {
     async function loadCredits() {
-      const url = `https://api.themoviedb.org/3/movie/${idFilm}/credits?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
-      const data = await getDataBackend(url);
+      const path = `movie/${idFilm}/credits`;
+      const data = await getDataBackend(path, null, true);
       setCredits(data);
     }
     loadCredits();
@@ -34,8 +34,8 @@ const DetailFilm = () => {
 
   useEffect(() => {
     async function loadTrailer() {
-      const url = `https://api.themoviedb.org/3/movie/${idFilm}/videos?api_key=d31881d7732eb0ca7f5bfe7017713b39&language=pt-BR`;
-      const data = await getDataBackend(url);
+      const path = `movie/${idFilm}/videos`;
+      const data = await getDataBackend(path, null, true);
       setTrailer(data.results[0].key);
     }
     loadTrailer();
@@ -43,7 +43,6 @@ const DetailFilm = () => {
 
   if (detail === null) return null;
   if (credits === null) return null;
-  // if (trailer === null) return null;
   return (
     <div className="detailPage">
       <section className="detailFilm">
