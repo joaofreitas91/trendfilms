@@ -50,12 +50,15 @@ const Films = () => {
   };
 
   async function filterFilms({ target }) {
+
     const id = Number(target.getAttribute('id'));
     const path = `movie/popular`;
     const data = await getDataBackend(path, currentPage);
     const results = data.results;
     const hasID = filter.includes(id);
     let filterLocal = [...filter];
+
+    target.classList.toggle('active')
 
     if (hasID) {
       filterLocal.splice(filterLocal.indexOf(id), 1);

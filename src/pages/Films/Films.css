@@ -1,73 +1,74 @@
 .subHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 0px;
-  background-color: #2d0c5e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0px;
+    background-color: #2d0c5e;
 }
 
 .subHeaderContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1024px;
 }
 
 .subHeaderContent p {
-  text-align: center;
-  color: #fff;
-  font-size: 1rem;
-  margin: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    margin: 10px;
 }
 
 .subHeaderContent span {
-  text-align: center;
-  color: #fff;
-  font-size: 48px;
-  max-width: 780px;
+    text-align: center;
+    color: #fff;
+    font-size: 48px;
+    max-width: 780px;
 }
 
 .buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .films {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 .films-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1024px;
 }
 .card {
-  margin: 3px;
-  overflow: hidden;
-  width: 162px;
+    margin: 3px;
+    overflow: hidden;
+    width: 162px;
 }
 
 .card img {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 
 .card h3 {
-  font-size: 1rem;
-  font-family: 'Roboto';
+    font-size: 1rem;
+    font-family: 'Roboto';
 }
 .card > p {
-  font-size: 0.8rem;
-  font-family: 'Roboto';
+    font-size: 0.8rem;
+    font-family: 'Roboto';
 }
 .paginations {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
-  width: 1024px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 1024px;
 }
