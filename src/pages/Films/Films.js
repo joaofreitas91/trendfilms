@@ -1,21 +1,24 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getDataBackend } from '../../utils/API';
-import { FormatDate } from '../../utils/Format';
-import Button from '../../components/Button/Button';
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { getDataBackend } from "../../utils/API";
+import { FormatDate } from "../../utils/Format";
+import Button from "../../components/Button/Button";
 
-import './Films.css';
+import "./Films.css";
 
 const Films = () => {
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pages, setPages] = useState([]);
   const [films, setFilms] = useState([]);
   const navigate = useNavigate();
   const [filter, setFilter] = useState([]);
 
+  const totalPages = 500;
+
   useEffect(() => {
     async function loadCategories() {
-      const path = 'genre/movie/list';
+      const path = "genre/movie/list";
       const data = await getDataBackend(path);
       setCategories(data.genres);
     }
@@ -30,35 +33,48 @@ const Films = () => {
       setFilms(data.results);
     }
     loadFilms();
+    controlPagination(1);
   }, []);
 
-  const changePage = async (event) => {
-    const buttonValue = event.target.value;
-    let page = currentPage;
+  const changePage = async (pageNumber) => {
+    window.scrollTo(0, 0);
 
-    if (buttonValue === 'next') {
-      ++page;
-    } else {
-      if (currentPage > 1) {
-        --page;
-      }
-    }
-    setCurrentPage(page);
     const path = `movie/popular`;
-    const data = await getDataBackend(path, page);
+    const data = await getDataBackend(path, pageNumber);
+
+    if (!pages.includes(pageNumber)) {
+      controlPagination(pageNumber);
+    }
+
+    setCurrentPage(pageNumber);
     setFilms(data.results);
   };
 
-  async function filterFilms({ target }) {
+  function controlPagination(pagRef) {
+    const newPagination = Array.from(Array(totalPages), (_, index) => {
+      return index + 1;
+    }).slice(pagRef - 1, pagRef + 4);
 
-    const id = Number(target.getAttribute('id'));
+    if (newPagination.length < 5) {
+      const endPages = Array.from(Array(totalPages), (_, index) => {
+        return index + 1;
+      }).slice(495, 500);
+      setPages(endPages);
+      return;
+    }
+
+    setPages(newPagination);
+  }
+
+  async function filterFilms({ target }) {
+    const id = Number(target.getAttribute("id"));
     const path = `movie/popular`;
     const data = await getDataBackend(path, currentPage);
     const results = data.results;
     const hasID = filter.includes(id);
     let filterLocal = [...filter];
 
-    target.classList.toggle('active')
+    target.classList.toggle("active");
 
     if (hasID) {
       filterLocal.splice(filterLocal.indexOf(id), 1);
@@ -76,7 +92,7 @@ const Films = () => {
   }
 
   function handleClick(event) {
-    const idFilm = event.currentTarget.getAttribute('data-id');
+    const idFilm = event.currentTarget.getAttribute("data-id");
     navigate(`/trendfilms/film/${idFilm}`);
   }
 
@@ -90,7 +106,7 @@ const Films = () => {
           <p>Filtre por:</p>
           <div className="buttons">
             {categories.map(({ id, name }) => (
-              <Button key={id} name={name} id={id} funcao={filterFilms} />
+              <Button key={id} name={name} id={id} callback={filterFilms} />
             ))}
           </div>
         </div>
@@ -108,14 +124,32 @@ const Films = () => {
             </div>
           ))}
         </div>
-        <div className="paginations">
-          <button onClick={changePage} value="back">
-            Página Anterior
-          </button>
-          <span>{currentPage}</span>
-          <button onClick={changePage} value="next">
-            Próxima Pagina
-          </button>
+        <div className="pagination">
+          {currentPage > 1 && (
+            <>
+              <button onClick={() => changePage(1)}>{"<<"}</button>
+              <button onClick={() => changePage(currentPage - 1)} value="back">
+                {"<"}
+              </button>
+            </>
+          )}
+          {pages.map((e) => (
+            <button
+              key={e}
+              onClick={(evt) => changePage(Number(evt.target.innerText))}
+              className={e === currentPage ? "selectedPage" : ""}
+            >
+              {e}
+            </button>
+          ))}
+          {currentPage < totalPages && (
+            <>
+              <button onClick={() => changePage(currentPage + 1)} value="next">
+                {">"}
+              </button>
+              <button onClick={() => changePage(totalPages)}>{">>"}</button>
+            </>
+          )}
         </div>
       </section>
     </>

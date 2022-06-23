@@ -1,3 +1,7 @@
+* {
+    scroll-behavior: smooth;
+}
+
 .subHeader {
     display: flex;
     justify-content: center;
@@ -40,12 +44,14 @@
     align-items: center;
     min-height: 100vh;
 }
+
 .films-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1024px;
 }
+
 .card {
     margin: 3px;
     overflow: hidden;
@@ -61,14 +67,42 @@
     font-size: 1rem;
     font-family: 'Roboto';
 }
-.card > p {
+
+.card>p {
     font-size: 0.8rem;
     font-family: 'Roboto';
 }
-.paginations {
+
+.pagination {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-    width: 100%;
-    max-width: 1024px;
+    align-items: center;
+
+    color: #fff;
+    font-size: 1.2rem;
+
+}
+
+.pagination button {
+    border: 0;
+    background: transparent;
+    color: #2d0c5e;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    padding: .5rem 1rem;
+}
+
+.pagination button:hover {
+    color: #fff;
+    background-color: #2d0c5e;
+    filter: brightness(1.75);
+
+}
+
+.pagination button.selectedPage {
+    color: #fff;
+    background-color: #2d0c5e;
+}
+
+.pagination button.selectedPage:hover {
+    filter: brightness(1.75);
 }

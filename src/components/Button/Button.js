@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalContext';
-import './Button.css';
+import "./Button.css";
 
-const Button = ({ name, id, funcao }) => {
+const Button = ({ name, id, callback }) => {
   return (
-    <button className="button" onClick={funcao} id={id}>
+    <button className="button" onClick={callback} id={id}>
       {name}
     </button>
   );

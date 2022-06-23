@@ -5,6 +5,7 @@
     font-size: 1rem;
     border-radius: 4px;
     margin: 8px;
+    padding: 10px;
 }
 
 .button.active {
@@ -19,11 +20,13 @@
     margin-left: 4px;
     animation: animateRotate 0.3s;
 }
+
 @keyframes animateRotate {
     from {
         opacity: 0;
         transform: translateX(5px) rotate(180deg);
     }
+
     to {
         opacity: initial;
         transform: initial;

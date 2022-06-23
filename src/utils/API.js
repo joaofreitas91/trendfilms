@@ -1,7 +1,10 @@
 export async function getDataBackend(path, page, whitoutPagination) {
   if (page === undefined) page = 1;
+
   const apiKey = 'd31881d7732eb0ca7f5bfe7017713b39';
+
   const leaguage = 'pt-BR';
+  
   let url = `https://api.themoviedb.org/3/${path}?page=${page}&language=${leaguage}&api_key=${apiKey}`;
 
   if (whitoutPagination) {
